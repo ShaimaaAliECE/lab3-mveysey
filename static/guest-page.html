@@ -7,33 +7,25 @@
     <title>Guest Page</title>
 </head>
 <body>
-    <h1>Please Specify Availability</h1>
-    
-    <form action='/addGuest' method='get'>
-        <label for="name">Name:</label>
+    <a href='/displayTimes'>Click here to see list of times</a>
+
+    <h3>Please Specify Availability</h3>
+        <form action='/addGuest' method='get'>
         <input type="text" id="name" name="name">
-        <label for="one">9:00</label>
         <input type="checkbox" id="one" name="one">
-        <label for="two">10:00</label>
         <input type="checkbox" id="two" name="two">
-        <label for="three">11:00</label>
         <input type="checkbox" id="three" name="three">
-        <label for="four">12:00</label>
         <input type="checkbox" id="four" name="four">
-        <label for="five">1:00</label>
         <input type="checkbox" id="five" name="five">
-        <label for="six">2:00</label>
         <input type="checkbox" id="six" name="six">
-        <label for="seven">3:00</label>
         <input type="checkbox" id="seven" name="seven">
-        <label for="eight">4:00</label>
         <input type="checkbox" id="eight" name="eight">
-        <label for="nine">5:00</label>
         <input type="checkbox" id="nine" name="nine">
-        <label for="ten">6:00</label>
         <input type="checkbox" id="ten" name="ten"><br><br>
         <input type="submit" value="Submit">
-    </form>
+        </form>
+
+    <a href='/displayAvailability'>Click here to see list of availability</a>
 </body>
 
 

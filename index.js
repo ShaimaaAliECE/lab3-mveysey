@@ -25,7 +25,7 @@ app.post('/login', (request, response) => {
     let password = request.body.pwd;
     let message = "Access denied, please return to home page.";
     if(username == 'admin' && password == '123'){
-        message = 'Welcome';
+        message = `<a href='/update-availability.html'>Please Click here to Proceed</a>`;
         // Writing cookies
         response.cookie("usr",username, {expires: new Date(2050,0,1)});
         response.cookie("pwd",password, {signed : true}, {expires: new Date(2050,0,1)});

@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guest Page</title>
 </head>
-<body>
-    <a href='/displayTimes'>Click here to see list of times</a>
+<body style= "background-color: powderblue;"> 
 
-    <h3>Please Specify Availability</h3>
+    <h3 style= "text-align:center; color: black;">Please Specify Availability</h3>
+
+    <div style="text-align:center; padding:30px;">
+    <a href='/displayTimes'>Click here to see list of current times</a>
+    </div>
+
+    <div style="text-align:center;">
         <form action='/addGuest' method='get'>
+        <label for="name">Name: </label>
         <input type="text" id="name" name="name">
+        <label for="one">Availability: </label>
         <input type="checkbox" id="one" name="one">
         <input type="checkbox" id="two" name="two">
         <input type="checkbox" id="three" name="three">
@@ -24,8 +31,11 @@
         <input type="checkbox" id="ten" name="ten"><br><br>
         <input type="submit" value="Submit">
         </form>
+    </div>
 
-    <a href='/displayAvailability'>Click here to see list of availability</a>
+    <div style="text-align:center; padding:30px;">
+    <a href='/displayAvailability'>Click here to see list of availability of all users</a>
+    </div>
 </body>
 
 

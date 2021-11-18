@@ -14,7 +14,7 @@ app.use(express.static('static'));
 app.use(express.urlencoded({
     // Extend access to body
     extended: true
-}))
+}));
 
 // If username/password combo is that of an admin, then they can proceed
 // otherwise, access will be denied
@@ -32,7 +32,7 @@ app.post('/login', (request, response) => {
     }
     response.send(message);
     conn.end();
-})
+});
 
 // Will remember username/password for next time by using cookies
 app.get('/login-form', (request,response) => {
@@ -63,7 +63,7 @@ app.get('/login-form', (request,response) => {
 
     response.send(content);
     conn.end();
-})
+});
 
 // Allow admin to create/reset tables in DB
 app.get('/create-reset-tables', (req,res) => {
@@ -138,29 +138,35 @@ app.get('/create-reset-tables', (req,res) => {
             });
 
     conn.end();
-})
+});
 
 // Will update/set the time [can only be performed by admin]
 app.get('/updateAvailability', (req,res) => {
     let conn = newConnection();
     conn.connect();
-    conn.query(`replace into Times set 
-    Available1='${req.query.one}',
-    Available2='${req.query.two}',
-    Available3='${req.query.three}', 
-    Available4='${req.query.four}', 
-    Available5='${req.query.five}', 
-    Available6='${req.query.six}', 
-    Available7='${req.query.seven}',
-    Available8='${req.query.eight}', 
-    Available9='${req.query.nine}', 
-    Available10='${req.query.ten}',`
-            ,(err,rows,fields) => {
-                res.redirect('/update-availability.html');        
-            });
 
+    let query1 = req.query.one;
+    let query2 = req.query.two;
+    let query3 = req.query.three;
+    let query4 = req.query.four;
+    let query5 = req.query.five;
+    let query6 = req.query.six;
+    let query7 = req.query.seven;
+    let query8 = req.query.eight;
+    let query9 = req.query.nine;
+    let query10 = req.query.ten;
+
+    conn.query(`insert into Times values ('${query1}','${query2}','${query3}','${query4}','${query5}','${query6}','${query7}','${query8}','${query9}','${query10}')`
+            ,(err,rows,fields) => {
+                if(err)
+                    console.log(err);
+                else
+                    // console.log(valueOf(req.query.one));
+                    console.log('inserted into Times')
+                    res.redirect('/update-availability.html');        
+            });
     conn.end();
-})
+});
 
 // Will display the list of times set/updated by the admin
 app.get('/displayTimes', (req,res) => {
@@ -170,7 +176,7 @@ app.get('/displayTimes', (req,res) => {
     conn.query(`select * from Times`
             ,(err,rows,fields) => {
                 if (err)
-                response.send('ERROR: ' +err)
+                res.send('ERROR: ' +err)
                 else
                 {
                     times = rows;
@@ -179,31 +185,106 @@ app.get('/displayTimes', (req,res) => {
                     for (t of times)
                     {
                         content += '<div>';
-                        content += t.Time1 + t.Time2 + t.Time3 + t.Time4 + t.Time5 + t.Time6 + t.Time7 + t.Time8 + t.Time9 + t.Time10
+                        content += t.Time1 + " , " + t.Time2 + " , " + t.Time3 + " , " + t.Time4 + " , " + t.Time5 + " , " + t.Time6 + " , " + t.Time7 + " , " + t.Time8 + " , " + t.Time9 + " , " + t.Time10
                         content += '</div>'
                         content += '\n';
                     }
                         
-                    response.send(content);
+                    res.send(content);
                 }
-            });
+            })
 
     conn.end();
-})
+});
 
 // Will add a new guest with their name/availability
 app.get('/addGuest', (req,res) => {
     let conn = newConnection();
     conn.connect();
-    conn.query(`insert into Availability values ('${req.query.name}','${String.valueOf(req.query.one)}','${String.valueOf(req.query.two)}',
-    '${String.valueOf(req.query.three)}', '${String.valueOf(req.query.four)}', '${String.valueOf(req.query.five)}', '${String.valueOf(req.query.six)}', '${String.valueOf(req.query.seven)}',
-    '${String.valueOf(req.query.eight)}', '${String.valueOf(req.query.nine)}', '${String.valueOf(req.query.ten)}',)`
+
+    let name = req.query.name;
+    let check1 = req.query.one;
+    let check2 = req.query.two;
+    let check3 = req.query.three;
+    let check4 = req.query.four;
+    let check5 = req.query.five;
+    let check6 = req.query.six;
+    let check7 = req.query.seven;
+    let check8 = req.query.eight;
+    let check9 = req.query.nine;
+    let check10 = req.query.ten;
+
+    if(check1 == 'on'){
+        check1 = "available";
+    }
+    else
+        check1 = "not available";
+
+    if(check2 == 'on'){
+        check2 = "available";
+    }
+    else
+        check2 = "not available";
+
+    if(check3 == 'on'){
+        check3 = "available";
+    }
+    else
+        check3 = "not available";
+
+    if(check4 == 'on'){
+        check4 = "available";
+    }
+    else
+        check4 = "not available";
+
+    if(check5 == 'on'){
+        check5 = "available";
+    }
+    else
+        check5 = "not available";
+
+    if(check6 == 'on'){
+        check6 = "available";
+    }
+    else
+        check6 = "not available";
+
+    if(check7 == 'on'){
+        check7 = "available";
+    }
+    else
+        check7 = "not available";
+
+    if(check8 == 'on'){
+        check8 = "available";
+    }
+    else
+        check8 = "not available";
+
+    if(check9 == 'on'){
+        check9 = "available";
+    }
+    else
+        check9 = "not available";
+
+    if(check10 == 'on'){
+        check10 = "available";
+    }
+    else
+        check10 = "not available";
+
+    conn.query(`insert into Availability values ('${name}','${check1}','${check2}','${check3}', '${check4}', '${check5}', '${check6}', '${check7}','${check8}', '${check9}', '${check10}')`
             ,(err,rows,fields) => {
-                res.redirect('/guest-page.html');        
-            } );
+                if(err)
+                    console.log(err);
+                else
+                    console.log('inserted into Availability') 
+                    res.redirect('/guest-page.html')
+            });
 
     conn.end();
-})
+});
 
 // Will display the availability of guests in a list
 app.get('/displayAvailability', (req,res) => {
@@ -213,7 +294,7 @@ app.get('/displayAvailability', (req,res) => {
     conn.query(`select * from Availability`
             ,(err,rows,fields) => {
                 if (err)
-                response.send('ERROR: ' +err)
+                res.send('ERROR: ' +err)
                 else
                 {
                     available = rows;
@@ -222,16 +303,16 @@ app.get('/displayAvailability', (req,res) => {
                     for (a of available)
                     {
                         content += '<div>';
-                        content += a.Name + ":" + a.Available1 + a.Available2 + a.Available3 + a.Available4 + a.Available5 + a.Available6 + a.Available7 + a.Available8 + a.Available9 + a.Available10
+                        content += a.Name + ":" + a.Available1 + " , " + a.Available2 + " , " + a.Available3 + " , " + a.Available4 + " , " + a.Available5 + " , " + a.Available6 + " , " + a.Available7 + " , " + a.Available8 + " , " + a.Available9 + " , " + a.Available10
                         content += '</div>'
                         content += '\n';
                     }
         
-                    response.send(content);
+                    res.send(content);
                 }
-            });
+            })
 
     conn.end();
-})
+});
 
 app.listen(80);

@@ -23,14 +23,16 @@ app.post('/login', (request, response) => {
     conn.connect();
     let username = request.body.usr;
     let password = request.body.pwd;
-    let message = "Access denied, please return to home page.";
+    let message = `<body style="background-color:powderblue;"><div style="text-align:center; margin-top:280px;"><a href='/index.html'>Access denied, click here to return to home page.</a></div></body>`;
     if(username == 'admin' && password == '123'){
-        message = `<a href='/createDB.html'>Please Click here to Proceed</a>`;
         // Writing cookies
         response.cookie("usr",username, {expires: new Date(2050,0,1)});
         response.cookie("pwd",password, {signed : true}, {expires: new Date(2050,0,1)});
+        response.redirect('/updateAvailability');
     }
-    response.send(message);
+    else {
+        response.send(message);
+    }
     conn.end();
 });
 
@@ -303,7 +305,7 @@ app.get('/displayAvailability', (req,res) => {
                     for (a of available)
                     {
                         content += '<div>';
-                        content += a.Name + ":" + a.Available1 + " , " + a.Available2 + " , " + a.Available3 + " , " + a.Available4 + " , " + a.Available5 + " , " + a.Available6 + " , " + a.Available7 + " , " + a.Available8 + " , " + a.Available9 + " , " + a.Available10
+                        content += a.Name + " : Time Slot 1: " + a.Available1 + " , Time Slot 2: " + a.Available2 + " , Time Slot 3: " + a.Available3 + " , Time Slot 4: " + a.Available4 + " , Time Slot 5: " + a.Available5 + " , Time Slot 6: " + a.Available6 + " , Time Slot 7: " + a.Available7 + " , Time Slot 8: " + a.Available8 + " , Time Slot 9: " + a.Available9 + " , Time Slot 10: " + a.Available10 + "\n"
                         content += '</div>'
                         content += '\n';
                     }

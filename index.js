@@ -97,16 +97,16 @@ app.get('/create-reset-tables', (req,res) => {
 // Create a table for the time values
     conn.query(`CREATE TABLE Times
             (
-                Time1 varchar(10),
-                Time2 varchar(10),
-                Time3 varchar(10),
-                Time4 varchar(10),
-                Time5 varchar(10),
-                Time6 varchar(10),
-                Time7 varchar(10),
-                Time8 varchar(10),
-                Time9 varchar(10),
-                Time10 varchar(10)
+                Time1 varchar(25),
+                Time2 varchar(25),
+                Time3 varchar(25),
+                Time4 varchar(25),
+                Time5 varchar(25),
+                Time6 varchar(25),
+                Time7 varchar(25),
+                Time8 varchar(25),
+                Time9 varchar(25),
+                Time10 varchar(25)
             )
             ` 
             , (err,rows,fields) => {
@@ -137,6 +137,16 @@ app.get('/create-reset-tables', (req,res) => {
                     console.log(err);
                     else 
                             console.log('Availability Table Created');
+            });
+
+    conn.query(`insert into Times values ('9:00-10:00','10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00','2:00-3:00','3:00-4:00','4:00-5:00','5:00-6:00','6:00-7:00')`
+            ,(err,rows,fields) => {
+                if(err)
+                    console.log(err);
+                else
+                    // console.log(valueOf(req.query.one));
+                    console.log('inserted into Times')
+                    res.redirect('/update-availability.html');        
             });
 
     conn.end();

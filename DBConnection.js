@@ -2,8 +2,8 @@ const mysql = require('mysql');
 
 function newConnection(){
     let conn = mysql.createConnection({
-        host:'34.130.165.189',
-        user:'doodle',
+        host:'34.133.59.111',
+        user:'root',
         password:'12sql34',
         database:'doodleDB'
     });
